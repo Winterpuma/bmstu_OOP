@@ -1,0 +1,15 @@
+#ifndef ERROR_HANDLER_H
+#define ERROR_HANDLER_H
+
+enum errors
+{
+    NONE,
+    FILE_NOT_FOUND,
+    FILE_FORMAT_ERR,
+    FILE_CONTENT_ERR,
+    PTR_ALL_ERR,
+    NO_DOTS,
+    UNKNOWN_COMMAND
+};
+
+#endif // ERROR_HANDLER_H
