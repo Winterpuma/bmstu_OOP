@@ -11,7 +11,7 @@ struct point
 struct points_data
 {
     int n;
-    point *arr;
+    point* arr;
 };
 
 int points_alloc(points_data& pts, int len);

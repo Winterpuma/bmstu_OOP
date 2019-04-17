@@ -69,5 +69,6 @@ int process_points(FILE *f, points_data &pts)
             points_free(pts);
         }
     }
+    // TODO Проверка длины массива
     return err;
 }

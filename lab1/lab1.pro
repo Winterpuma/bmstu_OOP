@@ -26,10 +26,27 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    drawing.cpp \
+    error_handler.cpp \
+    figure.cpp \
+    graph.cpp \
+    io.cpp \
+    link.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    point.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    drawing.h \
+    error_handler.h \
+    figure.h \
+    graph.h \
+    io.h \
+    link.h \
+    mainwindow.h \
+    point.h
 
 FORMS += \
         mainwindow.ui
