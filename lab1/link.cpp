@@ -3,6 +3,7 @@
 #include "link.h"
 #include "figure.h"
 #include "error_handler.h"
+#include "io.h"
 
 int links_alloc(links_data &connections, int len)
 {

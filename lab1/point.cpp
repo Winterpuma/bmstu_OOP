@@ -1,7 +1,9 @@
 #include "cstdio"
 #include <cstdlib>
+#include "point.h"
 #include "figure.h"
 #include "error_handler.h"
+#include "io.h"
 
 int points_alloc(points_data& pts, int len)
 {
@@ -62,7 +64,10 @@ int process_points(FILE *f, points_data &pts)
         {
             err = read_n_points(f, pts.arr, n);
         }
+        else
+        {
+            points_free(pts);
+        }
     }
-
     return err;
 }
