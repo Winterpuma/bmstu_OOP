@@ -19,7 +19,7 @@ void del(graphics &a)
 
 void set(QGraphicsView *gV, graphics &a)
 {
-    QGraphicsScene *pre = gV->scene();
-    delete pre;
+    QGraphicsScene *prev = gV->scene();
+    delete prev;
     gV->setScene(a.scene);
 }

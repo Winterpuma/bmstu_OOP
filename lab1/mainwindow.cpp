@@ -32,6 +32,17 @@ errors draw_action(Ui::MainWindow* ui)
     return err;
 }
 
+errors transform_and_show(request req, Ui::MainWindow* ui)
+{
+    errors err = (errors) task_manager(req);
+    if (err)
+        return err;
+    else
+        err = draw_action(ui);
+
+    return error;
+}
+
 // Load figure
 void MainWindow::on_actionOpen_triggered()
 {
@@ -39,17 +50,9 @@ void MainWindow::on_actionOpen_triggered()
     req.t = LOAD_FILE;
     req.load_f.filename = "cube.txt";
 
-    errors err = (errors) task_manager(req);
-    if (err)
-    {
-        error_message(err);
-        return;
-    }
-
-    err = draw_action(ui);
+    errors err = transform_and_show(req, ui);
     if (err)
         error_message(err);
-
 }
 
 // Transformation
@@ -62,11 +65,7 @@ void MainWindow::on_button_Move_clicked()
     req.mo.dy = ui->lineEdit_MoveY->text().toInt();
     req.mo.dz = ui->lineEdit_MoveZ->text().toInt();
 
-    errors err = (errors) task_manager(req);
-    if (err)
-        error_message(err);
-
-    err = draw_action(ui);
+    errors err = transform_and_show(req, ui);
     if (err)
         error_message(err);
 }
@@ -80,11 +79,7 @@ void MainWindow::on_button_Scale_clicked()
     req.sc.ky = ui->lineEdit_ScaleY->text().toFloat();
     req.sc.kz = ui->lineEdit_ScaleZ->text().toFloat();
 
-    errors err = (errors) task_manager(req);
-    if (err)
-        error_message(err);
-
-    err = draw_action(ui);
+    errors err = transform_and_show(req, ui);
     if (err)
         error_message(err);
 }
@@ -98,11 +93,7 @@ void MainWindow::on_button_Turn_clicked()
     req.tu.oy = ui->lineEdit_TurnY->text().toFloat();
     req.tu.oz = ui->lineEdit_TurnZ->text().toFloat();
 
-    errors err = (errors) task_manager(req);
-    if (err)
-        error_message(err);
-
-    err = draw_action(ui);
+    errors err = transform_and_show(req, ui);
     if (err)
         error_message(err);
 }
