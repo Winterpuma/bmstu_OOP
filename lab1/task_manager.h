@@ -6,6 +6,7 @@
 
 enum task
 {
+    INIT,
     LOAD_FILE,
     DRAW,
     MOVE,

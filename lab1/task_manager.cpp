@@ -10,8 +10,10 @@ int task_manager(request req)
 
     switch (req.t)
     {
+    case INIT:
+        break;
     case LOAD_FILE:
-        err = load_figure_from_file(req.load_f.filename, fig);
+        err = load_figure_from_file(fig, req.load_f.filename);
         break;
     case DRAW:
         err = draw_figure(fig, req.dr);

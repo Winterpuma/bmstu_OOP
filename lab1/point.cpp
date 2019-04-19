@@ -24,7 +24,7 @@ void points_free(points_data &pts)
 }
 
 
-int read_point(FILE* f, point* dot)
+int read_point(point* dot, FILE* f)
 {
     if (fscanf(f, "%lf%lf%lf", &dot->x, &dot->y, &dot->z) != 3)
         return FILE_FORMAT_ERR;
@@ -33,31 +33,32 @@ int read_point(FILE* f, point* dot)
 }
 
 
-int read_n_points(FILE *f, point *dots, int n)
+int read_n_points(point *dots, int n, FILE *f)
 {
     int err = 0;
     for (int i = 0; i < n && !err; i++)
     {
-        if (read_point(f, &dots[i]))
+        if (read_point(&dots[i], f))
             err = FILE_FORMAT_ERR;
     }
     return err;
 }
 
 
-int process_points(FILE *f, points_data &pts)
+int process_points(points_data &pts, FILE *f)
 {
     int n;
     int err = 0;
 
-    err = read_amount(f, &n);
+    err = read_amount(&n, f);
     if (!err)
     {
         err = points_alloc(pts, n);
         if (!err)
-            err = read_n_points(f, pts.arr, n);
-        else
-            points_free(pts);
+        {
+            if ((err = read_n_points(pts.arr, n, f)) == FILE_FORMAT_ERR)
+                points_free(pts);
+        }
     }
     // TODO Проверка длины массива
     return err;

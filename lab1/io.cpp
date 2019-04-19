@@ -1,7 +1,7 @@
 #include <cstdio>
 #include "error_handler.h"
 
-int read_amount(FILE* f, int* n)
+int read_amount(int* n, FILE* f)
 {
     int err = 0;
 

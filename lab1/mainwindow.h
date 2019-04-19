@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "error_handler.h"
+#include "task_manager.h"
 
 namespace Ui {
 class MainWindow;

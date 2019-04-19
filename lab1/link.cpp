@@ -24,7 +24,7 @@ void links_free(links_data &connections)
 }
 
 
-int read_link(FILE* f, link* joints)
+int read_link(link* joints, FILE* f)
 {
     if (fscanf(f, "%d%d", &joints->p1, &joints->p2) != 2)
         return FILE_FORMAT_ERR;
@@ -33,12 +33,12 @@ int read_link(FILE* f, link* joints)
 }
 
 
-int read_n_links(FILE *f, link* joints, int n)
+int read_n_links(link* joints, int n, FILE *f)
 {
     int err = 0;
     for (int i = 0; i < n && !err; i++)
     {
-        if (read_link(f, &joints[i]))
+        if (read_link(&joints[i], f))
             err = FILE_FORMAT_ERR;
     }
 
@@ -46,22 +46,20 @@ int read_n_links(FILE *f, link* joints, int n)
 }
 
 
-int process_links(FILE* f, links_data& connections, points_data& pts)
+int process_links(links_data& connections, FILE* f)
 {
     int n;
     int err = 0;
 
-    err = read_amount(f, &n);
+    err = read_amount(&n, f);
     if (!err)
     {
         err = links_alloc(connections, n);
         if (!err)
-            err = read_n_links(f, connections.arr, n);
-    }
-    if (err)
-    {
-        points_free(pts);
-        links_free(connections);
+        {
+            if ((err = read_n_links(connections.arr, n, f)) == FILE_FORMAT_ERR)
+                links_free(connections);
+        }
     }
     return err;
 }

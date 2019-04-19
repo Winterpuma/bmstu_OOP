@@ -3,12 +3,15 @@
 #include "task_manager.h"
 #include "error_handler.h"
 #include "operations.h"
-
+// изменяемые вначале, неизм в конце
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    request req;
+    req.t = INIT;
+    task_manager(req);
 }
 
 MainWindow::~MainWindow()
@@ -40,7 +43,7 @@ errors transform_and_show(request req, Ui::MainWindow* ui)
     else
         err = draw_action(ui);
 
-    return error;
+    return err;
 }
 
 // Load figure
