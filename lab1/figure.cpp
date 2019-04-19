@@ -31,16 +31,38 @@ void empty_figure(figure& fig)
     links_free(fig.links);
 }
 
+void copy_figure(figure& fig, figure& tmp)
+{
+    fig.points.n = tmp.points.n;
+    fig.points.arr = tmp.points.arr;
 
-int load_figure_from_file(const char *filename, figure& fig)
+    fig.links.n = tmp.links.n;
+    fig.links.arr = tmp.links.arr;
+}
+
+
+int load_figure_from_file(figure& fig, const char *filename)
 {
     FILE *f = fopen(filename, "r");
     if (!f)
         return FILE_NOT_FOUND;
+    figure fig_tmp = init();
 
-    int err = process_points(f, fig.points);
+    int err = process_points(fig_tmp.points, f);
     if (!err)
-        err = process_links(f, fig.links, fig.points);
+    {
+        err = process_links(fig_tmp.links, f);
+        if (err != NONE)
+        {
+            points_free(fig_tmp.points);
+        }
+    }
+
+    if (!err)
+    {
+        empty_figure(fig);
+        copy_figure(fig, fig_tmp);
+    }
 
     fclose(f);
     return err;
