@@ -1,6 +1,8 @@
 #ifndef POINT_H
 #define POINT_H
 
+#include <cstdio>
+
 struct point
 {
     double x;

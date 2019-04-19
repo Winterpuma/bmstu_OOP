@@ -25,7 +25,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
         mainwindow.cpp \
     drawing.cpp \
     error_handler.cpp \
@@ -33,9 +32,10 @@ SOURCES += \
     graph.cpp \
     io.cpp \
     link.cpp \
+    point.cpp \
     main.cpp \
-    mainwindow.cpp \
-    point.cpp
+    operations.cpp \
+    task_manager.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,8 +45,9 @@ HEADERS += \
     graph.h \
     io.h \
     link.h \
-    mainwindow.h \
-    point.h
+    point.h \
+    operations.h \
+    task_manager.h
 
 FORMS += \
         mainwindow.ui

@@ -11,9 +11,7 @@ int links_alloc(links_data &connections, int len)
 
     connections.arr = (link*) calloc(len, sizeof(link));
     if (!connections.arr)
-    {
         return PTR_ALL_ERR;
-    }
 
     return NONE;
 }
@@ -22,18 +20,15 @@ int links_alloc(links_data &connections, int len)
 void links_free(links_data &connections)
 {
     if (connections.arr)
-    {
         free(connections.arr);
-    }
 }
 
 
 int read_link(FILE* f, link* joints)
 {
     if (fscanf(f, "%d%d", &joints->p1, &joints->p2) != 2)
-    {
         return FILE_FORMAT_ERR;
-    }
+
     return NONE;
 }
 
@@ -44,10 +39,9 @@ int read_n_links(FILE *f, link* joints, int n)
     for (int i = 0; i < n && !err; i++)
     {
         if (read_link(f, &joints[i]))
-        {
             err = FILE_FORMAT_ERR;
-        }
     }
+
     return err;
 }
 
@@ -62,9 +56,7 @@ int process_links(FILE* f, links_data& connections, points_data& pts)
     {
         err = links_alloc(connections, n);
         if (!err)
-        {
             err = read_n_links(f, connections.arr, n);
-        }
     }
     if (err)
     {

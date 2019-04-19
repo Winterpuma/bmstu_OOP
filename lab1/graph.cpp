@@ -5,9 +5,7 @@ int init_graph(graphics &a, QGraphicsView *gV)
 {
     a.scene = new QGraphicsScene(gV);
     if (!a.scene)
-    {
         return PTR_ALL_ERR;
-    }
 
     a.pen = QPen(Qt::black);
 
