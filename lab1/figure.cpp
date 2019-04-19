@@ -53,9 +53,7 @@ int load_figure_from_file(figure& fig, const char *filename)
     {
         err = process_links(fig_tmp.links, f);
         if (err != NONE)
-        {
             points_free(fig_tmp.points);
-        }
     }
 
     if (!err)

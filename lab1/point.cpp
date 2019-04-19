@@ -53,13 +53,16 @@ int process_points(points_data &pts, FILE *f)
     err = read_amount(&n, f);
     if (!err)
     {
-        err = points_alloc(pts, n);
+        if (n)
+            err = points_alloc(pts, n);
+        else
+            err = NO_DOTS;
+
         if (!err)
         {
             if ((err = read_n_points(pts.arr, n, f)) == FILE_FORMAT_ERR)
                 points_free(pts);
         }
     }
-    // TODO Проверка длины массива
     return err;
 }

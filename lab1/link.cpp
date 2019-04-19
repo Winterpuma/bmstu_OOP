@@ -54,7 +54,11 @@ int process_links(links_data& connections, FILE* f)
     err = read_amount(&n, f);
     if (!err)
     {
-        err = links_alloc(connections, n);
+        if (n)
+            err = links_alloc(connections, n);
+        else
+            err = NO_LINKS;
+
         if (!err)
         {
             if ((err = read_n_links(connections.arr, n, f)) == FILE_FORMAT_ERR)

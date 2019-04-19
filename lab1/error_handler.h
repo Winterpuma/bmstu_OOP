@@ -9,6 +9,7 @@ enum errors
     FILE_CONTENT_ERR,
     PTR_ALL_ERR,
     NO_DOTS,
+    NO_LINKS,
     UNKNOWN_COMMAND
 };
 
