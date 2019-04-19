@@ -8,8 +8,8 @@
 struct draw
 {
     QGraphicsView *gV;
-    int width;
-    int heigh;
+    int w;
+    int h;
 };
 
 struct coord_point

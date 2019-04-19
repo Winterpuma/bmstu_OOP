@@ -12,8 +12,8 @@ coord_point point_transform(coord_point dot, draw arg)
 {
     coord_point tmp;
 
-    tmp.x = dot.x + arg.width/2;
-    tmp.y = dot.y + arg.heigh/2;
+    tmp.x = dot.x + arg.w/2;
+    tmp.y = dot.y + arg.h/2;
 
     return tmp;
 }

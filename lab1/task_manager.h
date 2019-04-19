@@ -7,10 +7,10 @@
 enum task
 {
     LOAD_FILE,
-    L_TURN,
-    V_TURN,
     DRAW,
-    SET_SCALE,
+    MOVE,
+    SCALE,
+    TURN,
     QUIT
 };
 

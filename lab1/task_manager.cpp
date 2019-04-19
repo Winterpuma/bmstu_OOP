@@ -10,17 +10,26 @@ int task_manager(request req)
 
     switch (req.t)
     {
-        case LOAD_FILE:
-            err = load_figure_from_file(req.load_f.filename, fig);
-            break;
-        case DRAW:
-            err = draw_figure(fig, req.dr);
-            break;
-        case QUIT:
-            empty_figure(fig);
-            break;
-        default:
-            err = UNKNOWN_COMMAND;
+    case LOAD_FILE:
+        err = load_figure_from_file(req.load_f.filename, fig);
+        break;
+    case DRAW:
+        err = draw_figure(fig, req.dr);
+        break;
+    case MOVE:
+        err = move_figure(fig, req.mo);
+        break;
+    case SCALE:
+        err = scale_figure(fig, req.sc);
+        break;
+    case TURN:
+        err = turn_figure(fig, req.tu);
+        break;
+    case QUIT:
+        empty_figure(fig);
+        break;
+    default:
+        err = UNKNOWN_COMMAND;
     }
 
     return err;
