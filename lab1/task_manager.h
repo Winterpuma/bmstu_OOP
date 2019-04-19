@@ -24,10 +24,11 @@ struct request
     task t;
     union
     {
-        struct draw dr;
-        struct turn tu;
-        struct scale sc;
         struct load_file load_f;
+        struct draw dr;
+        struct move mo;
+        struct scale sc;
+        struct turn tu;
     };
 };
 

@@ -34,7 +34,6 @@ void empty_figure(figure& fig)
 int load_figure_from_file(const char *filename, figure& fig)
 {
     FILE *f = fopen(filename, "r");
-
     if (!f)
         return FILE_NOT_FOUND;
 
@@ -54,6 +53,8 @@ int draw_figure(figure fig, draw arg)
     int err = init_graph(a, arg.gV);
     if (err)
         return err;
+
+    a.scene->addLine(100, 100, 200, 200, a.pen);
 
     //draw_lines(fig.points, fig.links, arg, a);
 

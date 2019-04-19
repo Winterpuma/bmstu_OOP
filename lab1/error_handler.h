@@ -12,4 +12,6 @@ enum errors
     UNKNOWN_COMMAND
 };
 
+void error_message(errors err);
+
 #endif // ERROR_HANDLER_H

@@ -3,13 +3,19 @@
 #include "operations.h"
 #include "figure.h"
 
-int task_manager(request args)
+int task_manager(request req)
 {
     static figure fig = init();
     int  err = 0;
 
-    switch (args.t)
+    switch (req.t)
     {
+        case LOAD_FILE:
+            err = load_figure_from_file(req.load_f.filename, fig);
+            break;
+        case DRAW:
+            err = draw_figure(fig, req.dr);
+            break;
         case QUIT:
             empty_figure(fig);
             break;

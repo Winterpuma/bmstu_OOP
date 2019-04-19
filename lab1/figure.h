@@ -2,6 +2,7 @@
 #define FIGURE_H
 #include "point.h"
 #include "link.h"
+#include "drawing.h"
 
 struct figure
 {
@@ -12,5 +13,6 @@ struct figure
 figure& init();
 void empty_figure(figure& fig);
 int load_figure_from_file(const char *filename, figure &ob);
+int draw_figure(figure fig, draw arg);
 
 #endif // FIGURE_H
