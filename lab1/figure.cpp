@@ -54,9 +54,7 @@ int draw_figure(figure fig, draw arg)
     if (err)
         return err;
 
-    a.scene->addLine(100, 100, 200, 200, a.pen);
-
-    //draw_lines(fig.points, fig.links, arg, a);
+    draw_links(fig.points, fig.links, arg, a);
 
     set(arg.gV, a);
 

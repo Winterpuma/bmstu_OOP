@@ -17,8 +17,10 @@ struct coord_point
     int x;
     int y;
 };
-/*
-void draw_line(graphics a, draw arg, coord_point beg, coord_point end);
-void draw_lines(points_data dots, links_data smezh, draw arg, graphics a);
-*/
+
+coord_point get_dot(point* dots, int n);
+coord_point point_transform(coord_point dot, draw arg);
+void draw_links(points_data pts, links_data links, draw arg, graphics a);
+void draw_line(graphics a, draw arg, coord_point p1, coord_point p2);
+
 #endif // DRAWING_H
