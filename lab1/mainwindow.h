@@ -26,6 +26,8 @@ private slots:
 
     void on_actionOpen_triggered();
 
+    void on_button_Turn_released();
+
 private:
     Ui::MainWindow *ui;
 };
