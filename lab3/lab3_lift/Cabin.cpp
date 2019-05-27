@@ -10,6 +10,7 @@ Cabin::Cabin(QObject *parent)
     QObject::connect(&timerMoveFloor, SIGNAL(timeout()), this, SLOT(slotMoving()));
     QObject::connect(this, SIGNAL(FloorAchieved()), this, SLOT(slotFree()));
     QObject::connect(this, SIGNAL(Move()), this, SLOT(slotMoving()));
+    QObject::connect(this, SIGNAL(FloorAchieved()), &door, SLOT(slotOpening()));
 }
 
 
@@ -17,7 +18,6 @@ void Cabin::slotMoving()
 {
     if (state == BUSY)
     {
-        qDebug() << "      BUSY      ";
         state = MOVING;
         if (currentFloor == targetFloor)
         {
@@ -57,6 +57,7 @@ void Cabin::slotMoving()
 
 void Cabin::slotFree()
 {
+    qDebug() << "STOP, floor" << currentFloor;
     state = FREE;
     emit FloorTargetAchieved(currentFloor, direct);
 }

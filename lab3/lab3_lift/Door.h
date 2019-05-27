@@ -16,6 +16,7 @@ class Door : public QObject
     };
 
 public:
+    StateDoor state;
     explicit Door();
 
 signals:
@@ -31,10 +32,12 @@ private slots:
     void slotClosing();
 
 private:
-    StateDoor state;
     QTimer timerOpen;
     QTimer timerClose;
     QTimer timerWaitOpen;
+
+signals:
+    void StopOpening();
 };
 
 #endif // DOOR_H

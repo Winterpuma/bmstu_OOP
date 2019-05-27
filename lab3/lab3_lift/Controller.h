@@ -22,7 +22,7 @@ public:
     ~Controller();
 
 signals:
-    void SendTarget(int floor);// { qDebug() << "he;;p"; }
+    void SendTarget(int floor);
 
 public slots:
     void slotChangeCurrentFloor(int floor, Direction d);
@@ -37,7 +37,6 @@ private:
     StateController state;
     int currentFloor;
     Direction direct;
-    Door door;
 
     bool targetArray[FLOOR_NUMBERS];
     MyButton* buttons[FLOOR_NUMBERS];
