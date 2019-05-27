@@ -20,7 +20,7 @@ public:
 
 signals:
     void DoorIsClosed();
-    void OpenDoor();
+    void DoorIsOpened();
 
 public slots:
     void slotOpen();

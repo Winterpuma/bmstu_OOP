@@ -6,12 +6,12 @@ Controller::Controller(QWidget *parent) : QWidget(parent)
     layout = new QVBoxLayout;
     this->setLayout(layout);
     for(int i = 0; i < FLOOR_NUMBERS; i++) {
-        buttons[i] = new CButton;
+        buttons[i] = new MyButton();
         layout->addWidget(dynamic_cast<QPushButton*>(buttons[i]));
         buttons[i]->setText(QString::number(i));
-        buttons[i]->SetNumberFloor(i);
+        buttons[i]->setFloorNumber(i);
         targetArray[i] = false;
-        QObject::connect(buttons[i], SIGNAL(floorRequest(int)), this, SLOT(slotAddNewFloor(int)));
+        QObject::connect(buttons[i], SIGNAL(floorRequest(int)), this, SLOT(slotAddFloorToVisit(int)));
     }
 
 }
@@ -34,11 +34,13 @@ void Controller::slotAchieveFloor(int floor, Direction d)
 {
     if(state == BUSY)
     {
-        qDebug() << "Stop on floor" << floor << "-------------";
+        qDebug() << "STOP, floor" << floor;
         currentFloor = floor;
         direct = d;
         targetArray[floor] = false;
         emit buttons[floor]->resetButton();
+        emit door.DoorIsOpened();
+
         if(GetNewTarget(floor))
         {
             emit SendTarget(floor);
@@ -48,13 +50,11 @@ void Controller::slotAchieveFloor(int floor, Direction d)
             state = NO_TARGET;
         }
     }
-
-    emit door.OpenDoor();
 }
 
-void Controller::slotAddNewFloor(int floor)
+
+void Controller::slotAddFloorToVisit(int floor)
 {
-//    qDebug() << "slotAddNewFloor";
     state = BUSY;
     targetArray[floor] = true;
     GetNewTarget(floor);

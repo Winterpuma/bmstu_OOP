@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QWidget>
 #include <QVBoxLayout>
-#include "Pult.h"
+#include "MyButton.h"
 #include "times.h"
 #include "Door.h"
 
@@ -29,7 +29,7 @@ public slots:
     void slotAchieveFloor(int floor, Direction d);
 
 private slots:
-    void slotAddNewFloor(int floor);
+    void slotAddFloorToVisit(int floor);
 
 private:
     bool GetNewTarget(int &newFloor);
@@ -40,7 +40,7 @@ private:
     Door door;
 
     bool targetArray[FLOOR_NUMBERS];
-    CButton* buttons[FLOOR_NUMBERS];
+    MyButton* buttons[FLOOR_NUMBERS];
 
     QVBoxLayout* layout;
 };

@@ -29,7 +29,7 @@ SOURCES += \
         Controller.cpp \
         Door.cpp \
         Elevator.cpp \
-        Pult.cpp \
+        MyButton.cpp \
         main.cpp \
         mainwindow.cpp
 
@@ -38,7 +38,7 @@ HEADERS += \
         Controller.h \
         Door.h \
         Elevator.h \
-        Pult.h \
+        MyButton.h \
         mainwindow.h \
         times.h
 
