@@ -15,10 +15,9 @@ public:
 
     void load(QString &fname);
     std::shared_ptr<QPixmap> draw();
-    /*void move(double dx, double dy, double dz, std::string ids);
+    void move(double dx, double dy, double dz, std::string ids);
     void scale(double kx, double ky, double kz, std::string ids);
     void rotate(double ax, double ay, double az, std::string ids);
-*/
 
 /*protected:
     CameraIterator cur_cam;

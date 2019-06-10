@@ -31,7 +31,8 @@ SOURCES += \
         mainwindow.cpp \
         processhandler.cpp \
         scene/scene.cpp \
-        scene/scenemanagers.cpp
+        scene/scenemanagers.cpp \
+        scene/transformmanager.cpp
 
 HEADERS += \
         commands/command.h \
@@ -39,7 +40,8 @@ HEADERS += \
         mainwindow.h \
         processhandler.h \
         scene/scene.h \
-        scene/scenemanagers.h
+        scene/scenemanagers.h \
+        scene/transformmanager.h
 
 FORMS += \
         mainwindow.ui
