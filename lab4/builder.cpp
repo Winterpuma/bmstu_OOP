@@ -3,21 +3,21 @@
 #include "exceptions/builderException.h"
 #include "object/model.h"
 
-/*
- * ModelBuilder::ModelBuilder() ()
+
+ModelBuilder::ModelBuilder()
 {
 }
-*/
+
 std::shared_ptr<Model> ModelBuilder::getModel() const
 {
     return model;
 }
 
-void ModelBuilder::build(struct buildParams params)
+void ModelBuilder::build(std::ifstream f)
 {
     model = std::make_shared<Model>();
-    buildEdges(params.f);
-    buildNodes(params.f);
+    buildEdges(f);
+    buildNodes(f);
 }
 
 void ModelBuilder::buildNode(const double x, const double y, const double z)

@@ -26,11 +26,11 @@ void Scene::load(QString &fileName)
     loader.load_from(fileName);
 }
 
-std::shared_ptr<QPixmap> Scene::draw()
+void Scene::draw()
 {
     auto drawer = SceneDrawManager(this);
 
-    return drawer.draw();
+    drawer.draw(canvas);
 }
 
 

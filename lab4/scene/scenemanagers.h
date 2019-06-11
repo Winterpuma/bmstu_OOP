@@ -43,6 +43,10 @@ public:
     //void set_parser(BaseParser *new_parser);
 
     void load_from(QString &fname);
+    std::ifstream openSrc(QString& fileName);
+    void closeSrc(std::ifstream);
+
+
 };
 
 #endif // SCENEMANAGERS_H

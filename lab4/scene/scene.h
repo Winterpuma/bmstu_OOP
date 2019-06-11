@@ -3,6 +3,7 @@
 
 #include "QString"
 #include "QPixmap"
+#include "QGraphicsScene"
 #include <vector>
 #include <memory>
 #include "iterator/iterator.h"
@@ -18,11 +19,10 @@ public:
     Scene();
 
     void load(QString &fname);
-    std::shared_ptr<QPixmap> draw();
+    void draw();
     void move(double dx, double dy, double dz, std::string ids);
     void scale(double kx, double ky, double kz, std::string ids);
     void rotate(double ax, double ay, double az, std::string ids);
-
 
     void addModel(const std::shared_ptr<Object>& model);
     void removeModel(const size_t index);
@@ -37,6 +37,9 @@ public:
     ObjIter objectEnd();
     ObjIter modelIndex(const size_t index);
     ObjIter cameraIndex(const size_t index);
+
+private:
+    QGraphicsScene* canvas;
 
 /*protected:
     CameraIterator cur_cam;

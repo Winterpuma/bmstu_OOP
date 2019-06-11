@@ -99,7 +99,10 @@ SceneLoadManager::SceneLoadManager(Scene *scene) : BaseSceneManager(scene) {}
 
 void SceneLoadManager::load_from(QString& fileName)
 {
-
+    ModelBuilder modelBuilder = ModelBuilder();
+    modelBuilder.build(openSrc(fileName));
+    //std::shared_ptr<Model> m = modelBuilder.getModel();
+    scene->addModel(modelBuilder.getModel());
     /*
     std::shared_ptr<std::ifstream> fin(new std::ifstream(QString& fileName));
 
@@ -116,4 +119,25 @@ void SceneLoadManager::load_from(QString& fileName)
     }
 
     fin->close();*/
+}
+
+std::ifstream SceneLoadManager::openSrc(QString& fileName)
+{
+    std::ifstream file;
+    file.open(fileName.toStdString());
+    if (!file)
+        throw OpenFileException();
+    return file;
+}
+
+void SceneLoadManager::closeSrc(std::ifstream file)
+{
+    try
+    {
+        file.close();
+    }
+    catch (const std::ifstream::failure& e)
+    {
+        throw CloseFileException();
+    }
 }
