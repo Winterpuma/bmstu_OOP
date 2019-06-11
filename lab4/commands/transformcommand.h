@@ -18,7 +18,7 @@ class MoveCommand : public TransformCommand
 public:
     MoveCommand(struct transformArgs args);
 
-    void execute(Scene &scene);
+    std::shared_ptr<BaseResult> execute(Scene &scene);
 };
 
 class ScaleCommand : public TransformCommand
@@ -26,7 +26,7 @@ class ScaleCommand : public TransformCommand
 public:
     ScaleCommand(struct transformArgs args);
 
-    void execute(Scene &scene);
+    std::shared_ptr<BaseResult> execute(Scene &scene);
 };
 
 class RotateCommand : public TransformCommand
@@ -34,7 +34,7 @@ class RotateCommand : public TransformCommand
 public:
     RotateCommand(struct transformArgs args);
 
-    void execute(Scene &scene);
+    std::shared_ptr<BaseResult> execute(Scene &scene);
 };
 
 struct transformArgs

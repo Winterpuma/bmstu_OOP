@@ -1,16 +1,20 @@
 #include "processhandler.h"
+#include "scene/scenebuilder.h"
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include "result.h"
 
 ProcessHandler::ProcessHandler()
 {
     this->scene = std::shared_ptr<Scene>(new Scene);
 
-    /*    auto scene_pointer = this->scene.get();
+    auto scene_pointer = this->scene.get();
 
     SceneBuilder builder(scene_pointer);
-    builder.build_scene(scene_pointer);*/
+    builder.build_scene();
 }
 
-void ProcessHandler::ProcessCommand(BaseCommand &command)
+std::shared_ptr<BaseResult> ProcessHandler::ProcessCommand(BaseCommand &command)
 {
-    command.execute(*(this->scene));
+    return command.execute(*(this->scene));
 }

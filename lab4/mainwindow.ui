@@ -17,8 +17,8 @@
    <widget class="QGraphicsView" name="Canvas">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
+      <x>0</x>
+      <y>560</y>
       <width>700</width>
       <height>551</height>
      </rect>
@@ -159,6 +159,19 @@
       <string>Rotate camera</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QLabel" name="canvas">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>60</y>
+      <width>601</width>
+      <height>411</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add model to show</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

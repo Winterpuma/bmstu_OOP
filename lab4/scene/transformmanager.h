@@ -5,18 +5,14 @@
 
 class TransformManager : public BaseSceneManager
 {
-protected:
-    std::vector<std::string> ids;
-
-    bool in(size_t id);
 public:
-    TransformManager(Scene *_scene, std::string ids);
+    TransformManager(Scene *_scene);
 };
 
 class MoveManager : public TransformManager
 {
 public:
-    MoveManager(Scene *_scene, std::string ids);
+    MoveManager(Scene *_scene);
 
     void move(double dx, double dy, double dz);
 };
@@ -24,7 +20,7 @@ public:
 class ScaleManager : public TransformManager
 {
 public:
-    ScaleManager(Scene *_scene, std::string ids);
+    ScaleManager(Scene *_scene);
 
     void scale(double kx, double ky, double kz);
 };
@@ -32,9 +28,10 @@ public:
 class RotateManager : public TransformManager
 {
 public:
-    RotateManager(Scene *_scene, std::string ids);
+    RotateManager(Scene *_scene);
 
     void rotate(double ax, double ay, double az);
+    void rotate(std::vector<Node> nodes, double ax, double ay, double az);
 };
 
 #endif // TRANSFORMMANAGER_H

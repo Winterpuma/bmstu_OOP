@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "QPixmap"
 
-//filePath.toStdString()
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -65,5 +65,7 @@ void MainWindow::on_rotateCameraButton_clicked()
 void MainWindow::SendDrawCommand()
 {
     auto command = DrawSceneCommand();
-    this->processHandler.ProcessCommand(command);
+    auto res = this->processHandler.ProcessCommand(command);
+
+    ui->canvas->setPixmap(*(static_cast<DrawResult*>(res.get())->GetData(0)));
 }

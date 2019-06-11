@@ -3,6 +3,9 @@
 
 #include <QString>
 #include "scene/scene.h"
+#include "result.h"
+/*
+ * std::shared_ptr<BaseProcessResult>*/
 
 class BaseCommand
 {
@@ -10,7 +13,7 @@ public:
     BaseCommand();
     virtual ~BaseCommand() = default;
 
-    virtual void execute(Scene &scene) = 0;
+    virtual std::shared_ptr<BaseResult> execute(Scene &scene) = 0;
 };
 
 class LoadFigureCommand : public BaseCommand
@@ -21,7 +24,7 @@ private:
 public:
     LoadFigureCommand(QString fileName);
 
-    void execute(Scene &scene);
+    std::shared_ptr<BaseResult> execute(Scene &scene);
 };
 
 class DrawSceneCommand : public BaseCommand
@@ -29,6 +32,6 @@ class DrawSceneCommand : public BaseCommand
 public:
     DrawSceneCommand();
 
-    void execute(Scene &scene);
+    std::shared_ptr<BaseResult> execute(Scene &scene);
 };
 #endif // COMMAND_H

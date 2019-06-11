@@ -12,9 +12,10 @@ MoveCommand::MoveCommand(struct transformArgs args): TransformCommand(args)
 
 }
 
-void MoveCommand::execute(Scene &scene)
+std::shared_ptr<BaseResult> MoveCommand::execute(Scene &scene)
 {
-    scene.move(x, y, z,  nullptr);
+    scene.move(x, y, z);
+    return std::shared_ptr<BaseResult>(nullptr);
 }
 
 ScaleCommand::ScaleCommand(struct transformArgs args): TransformCommand(args)
@@ -22,9 +23,10 @@ ScaleCommand::ScaleCommand(struct transformArgs args): TransformCommand(args)
 
 }
 
-void ScaleCommand::execute(Scene &scene)
+std::shared_ptr<BaseResult> ScaleCommand::execute(Scene &scene)
 {
-    scene.scale(x, y, z, nullptr);
+    scene.scale(x, y, z);
+    return std::shared_ptr<BaseResult>(nullptr);
 }
 
 RotateCommand::RotateCommand(struct transformArgs args): TransformCommand(args)
@@ -32,7 +34,8 @@ RotateCommand::RotateCommand(struct transformArgs args): TransformCommand(args)
 
 }
 
-void RotateCommand::execute(Scene &scene)
+std::shared_ptr<BaseResult> RotateCommand::execute(Scene &scene)
 {
-    scene.rotate(x, y, z, nullptr);
+    scene.rotate(x, y, z);
+    return std::shared_ptr<BaseResult>(nullptr);
 }

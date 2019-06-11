@@ -1,8 +1,10 @@
 #include "scenemanagers.h"
 #include "iterator/iterator.h"
 #include "drawer.h"
+#include "transformmanager.h"
 #include "builder.h"
 #include "QGraphicsScene"
+#include "QPainter"
 BaseSceneManager::BaseSceneManager(Scene *_scene)
 {
     this->scene = _scene;
@@ -10,12 +12,17 @@ BaseSceneManager::BaseSceneManager(Scene *_scene)
 
 SceneDrawManager::SceneDrawManager(Scene *scene) : BaseSceneManager(scene) {}
 
-void SceneDrawManager::draw(QGraphicsScene* canvas)
+std::shared_ptr<DrawResult> SceneDrawManager::draw()
 {
-    ModelDrawer drawer(canvas);
-    //std::shared_ptr<Camera> cm = std::static_pointer_cast<Camera>(obj);
-    //transformtions::Shifting shf(0, 0, 0);
-    //ModelTransformator transformator = ModelTransformator(shf, cm);
+    std::shared_ptr<DrawResult> res = std::shared_ptr<DrawResult>(new DrawResult);
+
+    QPainter canvas(res->GetData(0).get());
+    canvas.setBrush(Qt::white);
+    canvas.setPen(Qt::magenta);
+    canvas.drawRect(-1, 0, 650, 680);
+
+    std::shared_ptr<Camera> camera = std::static_pointer_cast<Camera>(*(scene->getCurrentCamera()));
+    RotateManager rotator(scene);
 
     ObjIter b = scene->objectBegin();
     ObjIter e = scene->objectEnd();
@@ -36,53 +43,19 @@ void SceneDrawManager::draw(QGraphicsScene* canvas)
             if (nodes.empty())
                 throw NoDrawingNodesException();
 
-            //transformator.transformNodes(nodes);
+            rotator.rotate(nodes, camera->getRtX(), camera->getRtY(), camera->getRtZ());
 
             for (size_t i = 0; i < edges.size(); ++i)
             {
                 const Node& src = nodes[edges[i].getSrc()];
                 const Node& dst = nodes[edges[i].getPurp()];
-                drawer.drawLine(getX(src.getX(), src.getZ()), getY(src.getY(), src.getZ()),
+                canvas.drawLine(getX(src.getX(), src.getZ()), getY(src.getY(), src.getZ()),
                              getX(dst.getX(), dst.getZ()), getY(dst.getY(), dst.getZ()));
             }
         }
     }
-/*
-    QPainter canvas(res->get_data(0).get());
-    canvas.setBrush(Qt::white);
-    canvas.setPen(Qt::magenta);
-    canvas.drawRect(-1, 0, 650, 680);
-
-    for (auto obj_i = this->scene->begin(); obj_i != this->scene->end(); ++obj_i)
-    {
-        auto obj_p = (*(obj_i));
-        if (obj_p.get_object()->get_is_drawable())
-        {
-            auto cur_obj = obj_p.get_object().get();
-            auto cur_cam = this->scene->get_current_camera();
-            auto pts = static_cast<Figure*>(cur_obj)->get_points_coord();
-
-            for (size_t i = 0; i < pts.size(); i++)
-            {
-                pts[i] = obj_p.get_transform()->vec_mult(pts[i]);
-                pts[i] = cur_cam->get_transform()->vec_mult(pts[i]);
-            }
-
-            pts = static_cast<Camera*>(cur_cam->get_object().get())->apply_cam(pts);
-            static_cast<Figure*>(cur_obj)->set_points(pts);
-
-            auto coord = static_cast<Figure*>(cur_obj)->get_edges();
-            for (auto iter : coord)
-            {
-                canvas.drawLine(int(iter[0]), int(iter[1]), int(iter[4]), int(iter[5]));
-            }
-
-            static_cast<Figure*>(cur_obj)->reset_points();
-        }
-    }
     canvas.end();
-
-    return res;*/
+    return res;
 }
 
 double SceneDrawManager::getX(const double x, const double z) const
@@ -101,7 +74,6 @@ void SceneLoadManager::load_from(QString& fileName)
 {
     ModelBuilder modelBuilder = ModelBuilder();
     modelBuilder.build(openSrc(fileName));
-    //std::shared_ptr<Model> m = modelBuilder.getModel();
     scene->addModel(modelBuilder.getModel());
     /*
     std::shared_ptr<std::ifstream> fin(new std::ifstream(QString& fileName));

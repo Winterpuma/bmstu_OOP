@@ -10,9 +10,10 @@ LoadFigureCommand::LoadFigureCommand(QString fileName)
     this->fileName = fileName;
 }
 
-void LoadFigureCommand::execute(Scene& scene)
+std::shared_ptr<BaseResult> LoadFigureCommand::execute(Scene& scene)
 {
     scene.load(this->fileName);
+    return std::shared_ptr<BaseResult>(nullptr);
 }
 
 DrawSceneCommand::DrawSceneCommand()
@@ -20,7 +21,7 @@ DrawSceneCommand::DrawSceneCommand()
 
 }
 
-void DrawSceneCommand::execute(Scene &scene)
+std::shared_ptr<BaseResult> DrawSceneCommand::execute(Scene &scene)
 {
-    scene.draw();
+    return scene.draw();
 }

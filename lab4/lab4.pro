@@ -36,7 +36,9 @@ SOURCES += \
         object/model.cpp \
         object/node.cpp \
         processhandler.cpp \
+        result.cpp \
         scene/scene.cpp \
+        scene/scenebuilder.cpp \
         scene/scenemanagers.cpp \
         scene/transformmanager.cpp
 
@@ -60,7 +62,9 @@ HEADERS += \
         object/node.h \
         object/object.h \
         processhandler.h \
+        result.h \
         scene/scene.h \
+        scene/scenebuilder.h \
         scene/scenemanagers.h \
         scene/transformmanager.h
 

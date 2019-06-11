@@ -7,7 +7,7 @@
 #include "scene.h"
 #include "exceptions/drawerException.h"
 #include "exceptions/uploaderException.h"
-
+#include "result.h"
 class BaseSceneManager
 {
 protected:
@@ -27,7 +27,7 @@ private:
 public:
     SceneDrawManager(Scene *_scene);
 
-    void draw(QGraphicsScene* canvas);
+    std::shared_ptr<DrawResult> draw();
 };
 
 #define NOFILE -1
@@ -45,8 +45,6 @@ public:
     void load_from(QString &fname);
     std::ifstream openSrc(QString& fileName);
     void closeSrc(std::ifstream);
-
-
 };
 
 #endif // SCENEMANAGERS_H

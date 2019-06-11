@@ -2,7 +2,7 @@
 #define PROCESSHANDLER_H
 
 #include "commands/command.h"
-
+#include "result.h"
 class ProcessHandler
 {
 private:
@@ -10,7 +10,7 @@ private:
 public:
     ProcessHandler();
 
-    void ProcessCommand(BaseCommand &command);
+    std::shared_ptr<BaseResult> ProcessCommand(BaseCommand &command);
 };
 
 #endif // PROCESSHANDLER_H
