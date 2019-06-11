@@ -29,6 +29,11 @@ SOURCES += \
         commands/transformcommand.cpp \
         main.cpp \
         mainwindow.cpp \
+        object/camera.cpp \
+        object/compositeobject.cpp \
+        object/edge.cpp \
+        object/model.cpp \
+        object/node.cpp \
         processhandler.cpp \
         scene/scene.cpp \
         scene/scenemanagers.cpp \
@@ -37,7 +42,20 @@ SOURCES += \
 HEADERS += \
         commands/command.h \
         commands/transformcommand.h \
+        exceptions/baseException.h \
+        exceptions/builderException.h \
+        exceptions/drawerException.h \
+        exceptions/objectexception.h \
+        exceptions/transformerException.h \
+        exceptions/uploaderException.h \
+        iterator/iterator.h \
         mainwindow.h \
+        object/camera.h \
+        object/compositeobject.h \
+        object/edge.h \
+        object/model.h \
+        object/node.h \
+        object/object.h \
         processhandler.h \
         scene/scene.h \
         scene/scenemanagers.h \

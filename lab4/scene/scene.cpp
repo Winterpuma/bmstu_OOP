@@ -4,6 +4,7 @@
 #include <QString>
 
 #include "scenemanagers.h"
+#include "transformmanager.h"
 
 /*#include "sceneloadmanager.h"
 #include "scenesavemanager.h"
@@ -32,32 +33,29 @@ std::shared_ptr<QPixmap> Scene::draw()
     return drawer.draw();
 }
 
-/*
-
-
 
 void Scene::move(double dx, double dy, double dz, std::string ids)
 {
-    auto mover = SceneMoveManager(this, ids);
+    auto mover = MoveManager(this, ids);
 
     mover.move(dx, dy, dz);
 }
 
 void Scene::scale(double kx, double ky, double kz, std::string ids)
 {
-    auto scaler = SceneScaleManager(this, ids);
+    auto scaler = ScaleManager(this, ids);
 
     scaler.scale(kx, ky, kz);
 }
 
 void Scene::rotate(double ax, double ay, double az, std::string ids)
 {
-    auto rotater = SceneRotateManager(this, ids);
+    auto rotater = RotateManager(this, ids);
 
     rotater.rotate(ax, ay, az);
 }
 
-
+/*
 CameraIterator &Scene::get_current_camera()
 {
     return this->cur_cam;
