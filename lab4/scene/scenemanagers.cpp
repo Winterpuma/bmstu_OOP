@@ -5,6 +5,7 @@
 #include "builder.h"
 #include "QGraphicsScene"
 #include "QPainter"
+
 BaseSceneManager::BaseSceneManager(Scene *_scene)
 {
     this->scene = _scene;
@@ -14,16 +15,10 @@ SceneDrawManager::SceneDrawManager(Scene *scene) : BaseSceneManager(scene) {}
 
 std::shared_ptr<DrawResult> SceneDrawManager::draw()
 {
-    std::shared_ptr<DrawResult> res = std::shared_ptr<DrawResult>(new DrawResult);
-
-    QPainter canvas(res->GetData(0).get());
-    canvas.setBrush(Qt::white);
-    canvas.setPen(Qt::magenta);
-    canvas.drawRect(-1, 0, 650, 680);
+    ModelDrawer drawer(650, 650);
 
     std::shared_ptr<Camera> camera = std::static_pointer_cast<Camera>(*(scene->getCurrentCamera()));
     RotateManager rotator(scene);
-
     ObjIter b = scene->objectBegin();
     ObjIter e = scene->objectEnd();
     for (ObjIter iter = b; iter != e; ++iter)
@@ -49,13 +44,12 @@ std::shared_ptr<DrawResult> SceneDrawManager::draw()
             {
                 const Node& src = nodes[edges[i].getSrc()];
                 const Node& dst = nodes[edges[i].getPurp()];
-                canvas.drawLine(getX(src.getX(), src.getZ()), getY(src.getY(), src.getZ()),
+                drawer.drawLine(getX(src.getX(), src.getZ()), getY(src.getY(), src.getZ()),
                              getX(dst.getX(), dst.getZ()), getY(dst.getY(), dst.getZ()));
             }
         }
     }
-    canvas.end();
-    return res;
+    return drawer.getResult();
 }
 
 double SceneDrawManager::getX(const double x, const double z) const
@@ -75,22 +69,6 @@ void SceneLoadManager::load_from(QString& fileName)
     ModelBuilder modelBuilder = ModelBuilder();
     modelBuilder.build(openSrc(fileName));
     scene->addModel(modelBuilder.getModel());
-    /*
-    std::shared_ptr<std::ifstream> fin(new std::ifstream(QString& fileName));
-
-    this->parser->set_file(fin);
-
-    while (true)
-    {
-        Object *obj = this->parser->parse();
-
-        if (obj == nullptr)
-            break;
-
-        this->scene->add_object(obj);
-    }
-
-    fin->close();*/
 }
 
 std::ifstream SceneLoadManager::openSrc(QString& fileName)

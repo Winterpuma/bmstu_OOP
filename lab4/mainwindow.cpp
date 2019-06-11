@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "QPixmap"
+#include "QtDebug"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -56,7 +57,7 @@ void MainWindow::on_rotateButton_clicked()
 
 void MainWindow::on_rotateCameraButton_clicked()
 {
-    auto command = RotateCommand({10, 10, 10}); //??
+    auto command = RotateCommand({10, 10, 10});
     processHandler.ProcessCommand(command);
 
     SendDrawCommand();
