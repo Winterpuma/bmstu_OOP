@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        builder.cpp \
         commands/command.cpp \
         commands/transformcommand.cpp \
         main.cpp \
@@ -40,8 +41,10 @@ SOURCES += \
         scene/transformmanager.cpp
 
 HEADERS += \
+        builder.h \
         commands/command.h \
         commands/transformcommand.h \
+        drawer.h \
         exceptions/baseException.h \
         exceptions/builderException.h \
         exceptions/drawerException.h \

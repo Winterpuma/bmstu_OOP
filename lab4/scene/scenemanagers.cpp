@@ -1,5 +1,8 @@
 #include "scenemanagers.h"
-
+#include "iterator/iterator.h"
+#include "drawer.h"
+#include "builder.h"
+#include "QGraphicsScene"
 BaseSceneManager::BaseSceneManager(Scene *_scene)
 {
     this->scene = _scene;
@@ -7,9 +10,43 @@ BaseSceneManager::BaseSceneManager(Scene *_scene)
 
 SceneDrawManager::SceneDrawManager(Scene *scene) : BaseSceneManager(scene) {}
 
-std::shared_ptr<QPixmap> SceneDrawManager::draw()
+void SceneDrawManager::draw(QGraphicsScene* canvas)
 {
-    std::shared_ptr<QPixmap> res =std::shared_ptr<QPixmap>(new QPixmap);
+    ModelDrawer drawer(canvas);
+    //std::shared_ptr<Camera> cm = std::static_pointer_cast<Camera>(obj);
+    //transformtions::Shifting shf(0, 0, 0);
+    //ModelTransformator transformator = ModelTransformator(shf, cm);
+
+    ObjIter b = scene->objectBegin();
+    ObjIter e = scene->objectEnd();
+    for (ObjIter iter = b; iter != e; ++iter)
+    {
+        if (!(*iter))
+            throw NoDrawingObjectException();
+
+        if ((*iter)->isVisible())
+        {
+            std::shared_ptr<Model> model = std::static_pointer_cast<Model>(*iter);
+
+            const std::vector<Edge> edges = model->getEdges();
+            if (edges.empty())
+                throw NoDrawingEdgesException();
+
+            std::vector<Node> nodes = model->getNodes();
+            if (nodes.empty())
+                throw NoDrawingNodesException();
+
+            //transformator.transformNodes(nodes);
+
+            for (size_t i = 0; i < edges.size(); ++i)
+            {
+                const Node& src = nodes[edges[i].getSrc()];
+                const Node& dst = nodes[edges[i].getPurp()];
+                drawer.drawLine(getX(src.getX(), src.getZ()), getY(src.getY(), src.getZ()),
+                             getX(dst.getX(), dst.getZ()), getY(dst.getY(), dst.getZ()));
+            }
+        }
+    }
 /*
     QPainter canvas(res->get_data(0).get());
     canvas.setBrush(Qt::white);
@@ -43,15 +80,27 @@ std::shared_ptr<QPixmap> SceneDrawManager::draw()
             static_cast<Figure*>(cur_obj)->reset_points();
         }
     }
-    canvas.end();*/
+    canvas.end();
 
-    return res;
+    return res;*/
+}
+
+double SceneDrawManager::getX(const double x, const double z) const
+{
+    return x + z * coeff3D;
+}
+
+double SceneDrawManager::getY(const double y, const double z) const
+{
+    return -y - z * coeff3D;
 }
 
 SceneLoadManager::SceneLoadManager(Scene *scene) : BaseSceneManager(scene) {}
 
 void SceneLoadManager::load_from(QString& fileName)
-{/*
+{
+
+    /*
     std::shared_ptr<std::ifstream> fin(new std::ifstream(QString& fileName));
 
     this->parser->set_file(fin);

@@ -3,7 +3,10 @@
 
 #include "QPixmap"
 #include "QString"
+#include "QGraphicsScene"
 #include "scene.h"
+#include "exceptions/drawerException.h"
+#include "exceptions/uploaderException.h"
 
 class BaseSceneManager
 {
@@ -16,11 +19,15 @@ public:
 class SceneDrawManager : public BaseSceneManager
 {
 private:
+    static constexpr double coeff3D = 0.5;
+
+    double getX(const double x, const double z) const;
+    double getY(const double y, const double z) const;
 
 public:
     SceneDrawManager(Scene *_scene);
 
-    std::shared_ptr<QPixmap> draw();
+    void draw(QGraphicsScene* canvas);
 };
 
 #define NOFILE -1
