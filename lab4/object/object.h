@@ -14,7 +14,6 @@ class VisibleObject : public Object
 {
 public:
     VisibleObject() = default;
-    virtual ~VisibleObject() = default;
 
     bool isVisible() override
     {
@@ -26,7 +25,6 @@ class InvisibleObject : public Object
 {
 public:
     InvisibleObject() = default;
-    virtual ~InvisibleObject() = default;
 
     bool isVisible() override
     {

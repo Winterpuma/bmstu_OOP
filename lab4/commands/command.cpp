@@ -12,7 +12,7 @@ LoadFigureCommand::LoadFigureCommand(QString fileName)
 
 void LoadFigureCommand::execute(Scene& scene)
 {
-
+    scene.load(this->fileName);
 }
 
 DrawSceneCommand::DrawSceneCommand()
@@ -22,5 +22,5 @@ DrawSceneCommand::DrawSceneCommand()
 
 void DrawSceneCommand::execute(Scene &scene)
 {
-
+    scene.draw();
 }

@@ -12,7 +12,6 @@ class CompositeObject : public Object
 {
 public:
     CompositeObject();
-    ~CompositeObject() = default;
 
     void addModel(std::shared_ptr<Object> object);
     void removeModel(const size_t index);

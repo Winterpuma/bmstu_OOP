@@ -11,7 +11,6 @@ protected:
 
 public:
     TransformCommand(struct transformArgs args);
-    void execute(Scene &scene);
 };
 
 class MoveCommand : public TransformCommand
