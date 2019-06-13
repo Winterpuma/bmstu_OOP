@@ -45,12 +45,12 @@ int scale_points_array(point* pts, int n, scale coeff)
 
 double d_cos(double angle)
 {
-    return cos(angle * M_PI / 180);
+    return cos(angle * 3.1415 / 180);
 }
 
 double d_sin(double angle)
 {
-    return sin(angle * M_PI / 180);
+    return sin(angle * 3.1415 / 180);
 }
 
 void x_turn_point(point& dot, double angle)

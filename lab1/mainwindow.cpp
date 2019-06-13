@@ -100,3 +100,8 @@ void MainWindow::on_button_Turn_clicked()
     if (err)
         error_message(err);
 }
+
+void MainWindow::on_button_Turn_released()
+{
+
+}
